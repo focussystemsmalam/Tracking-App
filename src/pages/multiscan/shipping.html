@@ -1,0 +1,42 @@
+<ion-label stacked>Country Code :</ion-label>
+<ion-label class="single-content">{{shipping.country}}</ion-label>
+<ion-label stacked>Delivery Id :</ion-label>
+<ion-label class="single-content">{{shipping.docnumber}}</ion-label>
+
+<ion-row [style.display]="selectedStatus.needsPortrait?'block':'none'">
+    <ion-item>
+        <button ion-button full (click)="takePicture()" class="photo-button" *ngIf="shipping">
+                Take Photo <ion-icon name="ios-camera-outline" style="font-size:20px;margin-left: 15px"></ion-icon>
+</button>
+</ion-item>
+<ion-item [style.display]="selectedStatus.needsPortrait&&shipping.imgUri?'':'none'">
+    <img style="height: 100px;width: 100px;" [src]="shipping.imgUri" alt="Error" />
+</ion-item>
+</ion-row>
+<div *ngIf="selectedStatus.needsSignature">
+    <div class="title">Please draw your Signature</div>
+    <ion-row [ngClass]="{'drawing-active': isDrawing}">
+        <ion-col></ion-col>
+        <ion-col>
+            <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+        </ion-col>
+        <ion-col></ion-col>
+
+    </ion-row>
+   <ion-row>
+      <ion-col>
+        <ion-icon name="md-close" class="orange center-icon" (click)="clearPad()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="md-checkmark-circle-outline" class="blue center-icon" (click)="savePad()"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="shipping.signature">
+        <ion-col></ion-col>
+        <ion-col width-80>
+            <img [src]="shipping.signature" />
+        </ion-col>
+        <ion-col></ion-col>
+    </ion-row>
+</div>

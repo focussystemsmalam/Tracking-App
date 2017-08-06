@@ -1,0 +1,22 @@
+<ion-content padding>
+  <button ion-button full (click)="scanShipping()" class="scan-button">Scan Barcode  <ion-icon name="ios-add" style="margin-left: 15px"></ion-icon>
+</button>
+<ion-list class="container">
+  <ion-list radio-group [(ngModel)]="selectedStatus">
+    <ion-item *ngFor="let opt of statuses">
+      <ion-label>{{opt.statusName}}</ion-label>
+      <ion-radio [value]="opt"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-item *ngFor="let shipping of scannedShippings">
+    <shipping [shipping]="shipping" [status]="selectedStatus"></shipping>
+    <br>
+    <ion-icon name="ios-trash-outline" (click)="remove(shipping)" class="orange center-icon"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <button ion-button full class="scan-button" *ngIf="scannedShippings.length>0 && selectedStatus.statusCode"
+      (click)="updateStatus()">Update Status</button>
+  </ion-item>
+</ion-list>
+</ion-content>

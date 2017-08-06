@@ -1,0 +1,11 @@
+<ion-list>
+    <ion-item>
+        <ion-input #inp type="text" placeholder="Enter Code"></ion-input>
+    </ion-item>
+    <ion-item>
+        <button ion-button full>Send code again</button>
+    </ion-item>
+    <ion-item>
+        <button (click)="verifiyUser(inp.value)" ion-button full>Verify</button>
+    </ion-item>
+</ion-list>

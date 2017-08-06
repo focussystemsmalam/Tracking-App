@@ -1,0 +1,40 @@
+<div>
+    <ion-item>
+        <button ion-button full block color="danger" (click)="getGoogleDetails()" style=" width: 100%;">
+<ion-icon name="logo-googleplus"></ion-icon>
+Sign Up with Google
+</button>
+</ion-item>
+<form #userForm="ngForm">
+    <ion-list>
+        <ion-item *ngIf="showErrors" style="color:red">
+<ion-label>
+    All the fields are required, please fill in the blanks.
+</ion-label>
+</ion-item>
+<ion-item>
+    <ion-label stacked style="color: red!important" *ngIf="email.ngControl.control.dirty && email.ngControl.control.errors">{{email.ngControl.control.errors.email}}</ion-label>
+<ion-input name="email" type="email" [(ngModel)]="tempUser.userEmail" placeholder="Email Addres" required #email></ion-input>
+</ion-item>
+<ion-item>
+    <ion-input name="password" type="password" [(ngModel)]="tempUser.userPassword" placeholder="Password" required></ion-input>
+</ion-item>
+<ion-item>
+    <ion-input name="fname" type="text" [(ngModel)]="tempUser.firstName" placeholder="First Name" required></ion-input>
+</ion-item>
+<ion-item>
+    <ion-input name="lname" type="text" [(ngModel)]="tempUser.lastName" placeholder="Last Name" required></ion-input>
+</ion-item>
+<ion-item>
+    <ion-label stacked style="color: red!important" *ngIf="idNumber.ngControl.control.dirty && idNumber.ngControl.control.errors">{{idNumber.ngControl.control.errors.id}}</ion-label>
+<ion-input name="id" type="text" [(ngModel)]="tempUser.userPID" placeholder="ID Number" required #idNumber></ion-input>
+</ion-item>
+<ion-item>
+    <ion-label stacked style="color: red!important" *ngIf="phoneNumber.ngControl.control.dirty && phoneNumber.ngControl.control.errors">{{phoneNumber.ngControl.control.errors.phone}}</ion-label>
+<ion-input name="phone" type="text" [(ngModel)]="tempUser.userTelephone" placeholder="Phone Number" style="display: inline-block" required #phoneNumber></ion-input>
+</ion-item>
+<ion-item><button ion-button full (click)="createUser()">Create Account!</button></ion-item>
+<ion-item><button ion-button full (click)="goToLogin()">Back to Login</button></ion-item>
+</ion-list>
+</form>
+</div>

@@ -1,0 +1,28 @@
+<form #userForm="ngForm">
+    <ion-list>
+        <ion-item *ngIf="showErrors" style="color:red">
+            <ion-label>
+                All the fields are required, please fill in the blanks.
+            </ion-label>
+        </ion-item>
+        <!--<ion-item>
+            <ion-input name="email" type="email" [(ngModel)]="tempUser.userEmail" placeholder="Email Addres" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="password" type="password" [(ngModel)]="tempUser.userPassword" placeholder="Password" required></ion-input>
+        </ion-item>-->
+        <ion-item>
+            <ion-input name="fname" type="text" [(ngModel)]="tempUser.FirstName" placeholder="First Name" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="lname" type="text" [(ngModel)]="tempUser.LastName" placeholder="Last Name" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="id" type="text" [(ngModel)]="tempUser.userPID" placeholder="ID Number" required></ion-input>
+        </ion-item>
+<!--<ion-item>
+    <ion-input name="phone" type="text" [(ngModel)]="tempUser.userTelephone" placeholder="Phone Number" style="display: inline-block" required ></ion-input>
+</ion-item>-->
+<ion-item><button ion-button full (click)="editUser()">Edit User</button></ion-item>
+</ion-list>
+</form>

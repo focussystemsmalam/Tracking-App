@@ -1,0 +1,55 @@
+<ion-content padding>
+  <button ion-button full class="scan-button" (click)="scanShipping()">Scan Barcode
+</button>
+<ion-list class="container">
+  <ion-item>
+    <ion-label stacked>Documents Number :</ion-label>
+    <ion-label class="single-content">{{scannedShipping.docnumber}}</ion-label>
+  </ion-item>
+  <ion-list radio-group [(ngModel)]="selectedStatus" *ngIf="scannedShipping">
+    <ion-item *ngFor="let opt of statuses">
+      <ion-label>{{opt.statusName}}</ion-label>
+      <ion-radio [value]="opt"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-item [style.display]="selectedStatus.needsPortrait?'block':'none'">
+    <button ion-button full class="photo-button" (click)="takePicture()" *ngIf="scannedShipping">Take Photo <ion-icon name="ios-camera-outline" style="font-size:20px;margin-left: 15px"></ion-icon>
+</button>
+</ion-item>
+<ion-item [style.display]="selectedStatus.needsPortrait&&imgUri?'':'none'">
+  <img style="height: 100px;width: 100px;" [src]="imgUri" alt="Error" />
+</ion-item>
+<ion-item *ngIf="selectedStatus.needsSignature">
+  <div>
+    <div class="title">Please draw your Signature</div>
+    <ion-row [ngClass]="{'drawing-active': isDrawing}">
+      <ion-col></ion-col>
+      <ion-col>
+        <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+      </ion-col>
+      <ion-col></ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-icon name="md-close" class="orange center-icon" (click)="clearPad()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="md-checkmark-circle-outline" class="blue center-icon" (click)="savePad()"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="signature">
+      <ion-col></ion-col>
+      <ion-col width-80>
+        <img [src]="signature" />
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </div>
+</ion-item>
+<ion-item>
+  <button ion-button full class="scan-button" *ngIf="scannedShipping && selectedStatus.statusCode" (click)="updateStatus()">Update Status</button>
+</ion-item>
+</ion-list>
+</ion-content>

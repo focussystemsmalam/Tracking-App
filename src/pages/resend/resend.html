@@ -1,0 +1,17 @@
+<ion-content>
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+      ></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="container">
+    <ion-list-header>Failed to send:</ion-list-header>
+    <ion-item *ngFor="let res of resends">
+      <ion-icon name="ios-cube-outline" item-left></ion-icon>
+      {{res.docnumber + ','+ res.country + ',' + res.statusName}}
+    </ion-item>
+    <ion-item>
+      <button ion-button icon-right full class="scan-button" (click)="updateStatus()" *ngIf="resends.length>0; else nothingBlock">Try sending again <ion-icon name="ios-refresh"></ion-icon></button>
+      <ng-template #nothingBlock>Nothing to resend..</ng-template>
+    </ion-item>
+  </ion-list>
+</ion-content>
